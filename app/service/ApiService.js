@@ -8,8 +8,23 @@ function ApiService () {
 
     this.listPolls = function (req, res) {
         var polls = [{title: 'some title', id:1}, {title: 'some title2', id:2}, {title: 'some title 3', id:3}];
-
         return res.json(polls);
+    };
+
+    this.createPoll = function (req, res) {
+        console.log("##"+ JSON.stringify(req.body));
+        var poll = new Poll({
+            creator: req.body.creator, //TODO maybe getit from session?
+            title: req.body.title,
+            options: req.body.options
+        });
+
+        poll.save(function (err, poll) {
+            if (err) {
+                console.log(err + ', Poll:' + JSON.stringify(poll));
+            }
+            return res.json(poll);
+        });
     };
 
     this.authenticate = function (req, res) {

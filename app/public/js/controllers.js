@@ -30,7 +30,23 @@ votingControllers.controller('myPollsController', ['$scope', '$route', '$window'
 votingControllers.controller('newPollController', ['$scope', '$route', '$window','$location', 'votingService',
     function ($scope, $route, $window, $location, votingService) {
 
+        $scope.form = {};
 
+        $scope.createPoll = function() {
+            var form = $scope.form;
+            var poll = {
+                creator: 'someID',
+                title:  form.title,
+                options:  form.options.split('\r|\n')
+            };
+
+            votingService.createPoll(poll).then(function(data) {
+                console.log("###createPoll" + data);
+                //TODO go to details with id
+                $location.path('/poll-detail/' + 1);
+
+            });
+        }
 
     }]);
 

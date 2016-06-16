@@ -17,6 +17,16 @@ votingServices.factory('votingService', ['$http', '$location',
             });
         };
 
-        return {listPolls: listPolls};
+        var createPoll = function(poll) {
+            var url = appContext + '/api/poll/new';
+            return $http.post(url, poll).then(function (response) {
+                return response.data;
+            });
+        };
+
+        return {
+            listPolls: listPolls,
+            createPoll: createPoll
+        };
     }]);
 
