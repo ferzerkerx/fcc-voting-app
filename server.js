@@ -2,11 +2,15 @@
 
 var express = require('express');
 var mongoose = require('mongoose');
+var bodyParser = require('body-parser');
 
 var routesIndex = require('./app/routes/index.js');
 var routesApi = require('./app/routes/api.js');
 
 var app = express();
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
 require('dotenv').load();
 
 mongoose.connect(process.env.MONGO_URI);

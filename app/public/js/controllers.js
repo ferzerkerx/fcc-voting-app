@@ -34,10 +34,11 @@ votingControllers.controller('newPollController', ['$scope', '$route', '$window'
 
         $scope.createPoll = function() {
             var form = $scope.form;
+
             var poll = {
                 creator: 'someID',
                 title:  form.title,
-                options:  form.options.split('\r|\n')
+                options:  form.options.split('\n')
             };
 
             votingService.createPoll(poll).then(function(data) {

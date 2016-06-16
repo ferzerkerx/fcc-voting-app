@@ -14,7 +14,7 @@ function ApiService () {
     this.createPoll = function (req, res) {
         console.log("##"+ JSON.stringify(req.body));
         var poll = new Poll({
-            creator: req.body.creator, //TODO maybe getit from session?
+            creator: req.body.creator, //TODO maybe get it from session?
             title: req.body.title,
             options: req.body.options
         });
