@@ -10,4 +10,7 @@ module.exports = function (app) {
     app.route('/api/polls')
         .get(apiService.listPolls);
 
+    app.route('/api/authenticate')
+        .get(apiService.authenticate);
+
 };
