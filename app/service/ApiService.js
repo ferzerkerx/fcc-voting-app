@@ -7,7 +7,7 @@ var OAuth = require('oauth');
 function ApiService () {
 
     this.listPolls = function (req, res) {
-        var polls = ['some Poll'];
+        var polls = [{title: 'some title', id:1}, {title: 'some title2', id:2}, {title: 'some title 3', id:3}];
 
         return res.json(polls);
     };
