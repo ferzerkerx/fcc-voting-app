@@ -24,9 +24,17 @@ votingServices.factory('votingService', ['$http', '$location',
             });
         };
 
+        var getPollDetails = function(pollId) {
+            var url = appContext + '/api/poll-details/' + pollId;
+            return $http.get(url).then(function (response) {
+                return response.data;
+            });
+        };
+
         return {
             listPolls: listPolls,
-            createPoll: createPoll
+            createPoll: createPoll,
+            getPollDetails: getPollDetails
         };
     }]);
 

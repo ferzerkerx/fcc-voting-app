@@ -53,7 +53,21 @@ votingControllers.controller('newPollController', ['$scope', '$route', '$window'
 
 votingControllers.controller('pollDetailController', ['$scope', '$route', '$routeParams' ,'$window','$location', 'votingService',
     function ($scope, $route, $routeParams , $window, $location, votingService) {
-        $scope.pollId=$routeParams.pollId;
+
+        function getPollDetails(pollId) {
+            votingService.getPollDetails(pollId).then(function(data) {
+
+                if (!data) {
+                    //TODO
+                    $location.path('/polls/');
+                    return;
+                }
+
+                $scope.poll = data;
+            });
+        }
+
+        getPollDetails($routeParams.pollId);
     }]);
 
 votingControllers.controller('barController', ['$scope', '$rootScope', '$route', '$routeParams' ,'$window','$location', 'votingService',

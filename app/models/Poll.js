@@ -5,7 +5,7 @@ var Schema = mongoose.Schema;
 var ObjectId = Schema.ObjectId;
 
 var Poll = new Schema({
-    creator: String,
+    creator: String, //TODO Use objectId?
     title: String,
     options: { type : Array , "default" : [] }
 });

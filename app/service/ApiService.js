@@ -7,12 +7,16 @@ var OAuth = require('oauth');
 function ApiService () {
 
     this.listPolls = function (req, res) {
-        var polls = [{title: 'some title', id:1}, {title: 'some title2', id:2}, {title: 'some title 3', id:3}];
-        return res.json(polls);
+
+        Poll.find({}, function(err, polls){
+            if (err) {
+                return res.json(500, {});
+            }
+            return res.json(polls);
+        });
     };
 
     this.createPoll = function (req, res) {
-        console.log("##"+ JSON.stringify(req.body));
         var poll = new Poll({
             creator: req.body.creator, //TODO maybe get it from session?
             title: req.body.title,
@@ -21,8 +25,19 @@ function ApiService () {
 
         poll.save(function (err, poll) {
             if (err) {
-                console.log(err + ', Poll:' + JSON.stringify(poll));
+                return res.json(500, {});
             }
+            return res.json(poll);
+        });
+    };
+
+    this.pollDetails = function (req, res) {
+        var pollId =  req.params.pollId;
+        Poll.findOne({_id:pollId}, function(err, poll){
+            if (err) {
+                return res.json(500, {});
+            }
+
             return res.json(poll);
         });
     };
