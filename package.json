@@ -1,0 +1,29 @@
+{
+  "name": "fcc-voting-app",
+  "version": "0.0.1",
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ferzerkerx/fcc-voting-app"
+  },
+  "homepage": "https://github.com/ferzerkerx/fcc-voting-app",
+  "bugs": "https://github.com/ferzerkerx/fcc-voting-app/issues",
+  "keywords": [
+    "Express",
+    "Node",
+    "javascript",
+    "FreeCodeCamp",
+    "MongoDB",
+    "Mongoose"
+  ],
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "Fernando Montes",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^1.2.0",
+    "express": "^4.12.4",
+    "mongoose": "^4.1.0"
+  }
+}
