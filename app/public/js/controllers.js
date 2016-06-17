@@ -43,9 +43,7 @@ votingControllers.controller('newPollController', ['$scope', '$route', '$window'
 
             votingService.createPoll(poll).then(function(data) {
                 console.log("###createPoll" + data);
-                //TODO go to details with id
-                $location.path('/poll-detail/' + 1);
-
+                $location.path('/poll-detail/' + data._id);
             });
         }
 
@@ -53,6 +51,21 @@ votingControllers.controller('newPollController', ['$scope', '$route', '$window'
 
 votingControllers.controller('pollDetailController', ['$scope', '$route', '$routeParams' ,'$window','$location', 'votingService',
     function ($scope, $route, $routeParams , $window, $location, votingService) {
+
+        $scope.form = {
+            id:undefined,
+            selectedOption:undefined,
+            customOption:undefined
+        };
+
+        $scope.submitVote =  function() {
+            $scope.form.id = $scope.poll._id;
+            //TODO validate
+            votingService.submitVote($scope.form).then(function(data) {
+                $route.reload();//TODO do not reload
+            });
+        };
+
 
         function getPollDetails(pollId) {
             votingService.getPollDetails(pollId).then(function(data) {
@@ -65,36 +78,38 @@ votingControllers.controller('pollDetailController', ['$scope', '$route', '$rout
 
 
                 $scope.poll = data;
-                renderChart();
+                renderChart($scope.poll);
             });
         }
 
-        function renderChart() {
+        function renderChart(poll) {
+            var backgroundColors = [];
+            var votes = [];
+            var options = [];
+
+            for (var i = 0; i  < poll.options.length; i++) {
+                var number = Math.floor(Math.random()*16777216);
+                var color = '#'+ number.toString(16);
+                backgroundColors.push(color);
+
+                var option = poll.options[i];
+                options.push(option.name);
+                votes.push(option.votes);
+            }
+
+
 
             var data = {
-                labels: [
-                    "Red",
-                    "Blue",
-                    "Yellow"
-                ],
+                labels: options,
                 datasets: [
                     {
-                        data: [300, 50, 100],
-                        backgroundColor: [
-                            "#FF6384",
-                            "#36A2EB",
-                            "#FFCE56"
-                        ],
-                        hoverBackgroundColor: [
-                            "#FF6384",
-                            "#36A2EB",
-                            "#FFCE56"
-                        ]
+                        data: votes,
+                        backgroundColor: backgroundColors
                     }]
             };
 
             var ctx = $("#myChart");
-            var myDoughnutChart = new Chart(ctx, {
+            new Chart(ctx, {
                 type: 'doughnut',
                 data: data,
                 options: {}

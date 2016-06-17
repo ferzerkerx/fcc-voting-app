@@ -31,10 +31,18 @@ votingServices.factory('votingService', ['$http', '$location',
             });
         };
 
+        var submitVote = function(data) {
+            var url = appContext + '/api/poll/' + data.id + "/vote";
+            return $http.post(url, data).then(function (response) {
+                return response.data;
+            });
+        };
+
         return {
             listPolls: listPolls,
             createPoll: createPoll,
-            getPollDetails: getPollDetails
+            getPollDetails: getPollDetails,
+            submitVote: submitVote,
         };
     }]);
 
