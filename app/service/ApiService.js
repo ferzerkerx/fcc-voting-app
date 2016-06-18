@@ -120,8 +120,7 @@ function ApiService () {
     this.twitterRequestLogin = function (req, res) {
         oauth.getOAuthRequestToken(function(err, oauth_token, oauth_token_secret){
             req.session.oauth_token_secret = oauth_token_secret;
-            res.writeHead(302, {'Location': 'https://api.twitter.com/oauth/authenticate?oauth_token=' + oauth_token});
-            res.end();
+            res.json({'location': 'https://api.twitter.com/oauth/authenticate?oauth_token=' + oauth_token});
         });
     };
 

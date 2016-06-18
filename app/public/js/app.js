@@ -1,5 +1,11 @@
 'use strict';
 
+
+if (window.opener)  {
+    window.opener.location.reload();
+    window.close();
+}
+
 var votingApp = angular.module('votingApp', [
     'ngRoute',
     'votingControllers',
