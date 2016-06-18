@@ -1,7 +1,7 @@
 'use strict';
 
 var path = process.cwd();
-var APIService = require(path + '/app/service/APIService.js');
+var APIService = require(path + '/app/service/ApiService.js');
 
 module.exports = function (app) {
 
