@@ -1,11 +1,11 @@
 'use strict';
 
 var path = process.cwd();
-var APIService = require(path + '/app/service/ApiService.js');
+var ApiService = require(path + '/app/service/ApiService.js');
 
 module.exports = function (app) {
 
-    var apiService = new APIService();
+    var apiService = new ApiService();
 
     app.route('/api/polls')
         .get(apiService.listPolls);
