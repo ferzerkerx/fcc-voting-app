@@ -16,9 +16,10 @@
             </div>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="/#/polls" data-toggle="tab">Home</a></li>
-                <li><a href="/#/my-polls" data-toggle="tab">My Polls</a></li>
-                <li><a href="/#/new-poll" data-toggle="tab">New Poll</a></li>
-                <li><a href="/#/" data-toggle="tab">Login</a></li>
+                <li ng-show="userDetails.isLogged"><a href="/#/my-polls" data-toggle="tab">My Polls</a></li>
+                <li ng-show="userDetails.isLogged"><a href="/#/new-poll" data-toggle="tab">New Poll</a></li>
+                <li ng-show="!userDetails.isLogged"><button ng-click="twitterLogin()">Sign in with twitter</button></li>
+                <li ng-show="userDetails.isLogged">{{userDetails.name}}<button ng-click="twitterLogout()">Sign out</button></li>
             </ul>
         </div>
     </nav>

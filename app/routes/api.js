@@ -19,7 +19,16 @@ module.exports = function (app) {
     app.route('/api/poll-details/:pollId')
         .get(apiService.pollDetails);
 
-    app.route('/api/authenticate')
-        .get(apiService.authenticate);
+    app.route('/api/userDetails')
+        .get(apiService.userDetails);
+
+    app.route('/api/twitter/requestLogin')
+        .post(apiService.twitterRequestLogin);
+
+    app.route('/api/twitter/callback')
+        .get(apiService.twitterCallback);
+
+    app.route('/api/logout')
+        .get(apiService.doLogout);
 
 };

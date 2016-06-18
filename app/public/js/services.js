@@ -38,11 +38,36 @@ votingServices.factory('votingService', ['$http', '$location',
             });
         };
 
+
+        var doLogin = function() {
+            var url = appContext + '/api/twitter/requestLogin';
+            return $http.post(url).then(function (response) {
+                return response.data;
+            });
+        };
+
+        var doLogout = function() {
+            var url = appContext + '/api/logout';
+            return $http.get(url).then(function (response) {
+                return response.data;
+            });
+        };
+
+        var userDetails = function() {
+            var url = appContext + '/api/userDetails';
+            return $http.get(url).then(function (response) {
+                return response.data;
+            });
+        };
+
         return {
             listPolls: listPolls,
             createPoll: createPoll,
             getPollDetails: getPollDetails,
             submitVote: submitVote,
+            doLogin: doLogin,
+            doLogout: doLogout,
+            userDetails: userDetails
         };
     }]);
 

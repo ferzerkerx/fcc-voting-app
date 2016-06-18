@@ -33,6 +33,7 @@ votingControllers.controller('newPollController', ['$scope', '$route', '$window'
         $scope.form = {};
 
         $scope.createPoll = function() {
+            //TODO validate
             var form = $scope.form;
 
             var poll = {
@@ -61,7 +62,7 @@ votingControllers.controller('pollDetailController', ['$scope', '$route', '$rout
         $scope.submitVote =  function() {
             $scope.form.id = $scope.poll._id;
             //TODO validate
-            votingService.submitVote($scope.form).then(function(data) {
+            votingService.submitVote($scope.form).then(function() {
                 $route.reload();//TODO do not reload
             });
         };
@@ -121,6 +122,23 @@ votingControllers.controller('pollDetailController', ['$scope', '$route', '$rout
 
 votingControllers.controller('barController', ['$scope', '$rootScope', '$route', '$routeParams' ,'$window','$location', 'votingService',
     function ($scope, $rootScope, $route, $routeParams , $window, $location, votingService) {
+
+        $scope.userDetails = {};
+        $scope.twitterLogin = function() {
+            votingService.doLogin();
+        };
+
+        $scope.twitterLogout = function() {
+            votingService.doLogout().then(function() {
+                $scope.userDetails = {};
+                $location.path('/');
+            });
+        };
+
+        votingService.userDetails().then(function(data) {
+            $scope.userDetails = data;
+        });
+
 
 
     }]);

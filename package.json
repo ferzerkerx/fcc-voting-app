@@ -24,9 +24,12 @@
   "dependencies": {
     "body-parser": "^1.15.1",
     "bower": "^1.7.9",
+    "connect-mongo": "^1.2.0",
     "dotenv": "^1.2.0",
     "express": "^4.12.4",
+    "express-session": "^1.13.0",
     "mongoose": "^4.1.0",
-    "oauth": "^0.9.14"
+    "oauth": "^0.9.14",
+    "qs": "^6.2.0"
   }
 }
