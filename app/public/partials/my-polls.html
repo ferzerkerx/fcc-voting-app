@@ -1,3 +1,10 @@
 <div>
-    My Polls
+    <div>
+        Select a poll to see the results and vote, or make a new poll!
+    </div>
+    <div ng-repeat="poll in polls">
+        {{poll.title}}
+        <a href="" ng-click="goToDetails(poll._id)">Go to details</a>
+    </div>
+
 </div>

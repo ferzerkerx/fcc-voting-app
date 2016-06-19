@@ -18,6 +18,17 @@ function ApiService () {
         });
     };
 
+    this.listMyPolls = function (req, res) {
+
+        Poll.find({creator: req.session.userData.userName}, function(err, polls){
+            if (err) {
+                console.log(err);
+                return res.json(500, {});
+            }
+            return res.json(polls);
+        });
+    };
+
     this.createPoll = function (req, res) {
 
         var options = req.body.options;

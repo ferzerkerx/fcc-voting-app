@@ -10,6 +10,9 @@ module.exports = function (app) {
     app.route('/api/polls')
         .get(apiService.listPolls);
 
+    app.route('/api/my-polls')
+        .get(apiService.listMyPolls);
+
     app.route('/api/poll/new')
         .post(apiService.createPoll);
 
