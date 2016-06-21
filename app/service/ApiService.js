@@ -124,7 +124,7 @@ function ApiService () {
         twitterConsumerKey,
         twitterConsumerSecret,
         '1.0A',
-        'http://127.0.0.1:8080/api/twitter/callback',
+        req.protocol + '://' + req.get('host') + '/api/twitter/callback',
         'HMAC-SHA1'
     );
 
