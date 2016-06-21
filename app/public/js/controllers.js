@@ -87,8 +87,8 @@ votingControllers.controller('newPollController', ['$scope', '$route', '$window'
 
     }]);
 
-votingControllers.controller('pollDetailController', ['$scope', '$route', '$routeParams' ,'$window','$location', 'votingService',
-    function ($scope, $route, $routeParams , $window, $location, votingService) {
+votingControllers.controller('pollDetailController', ['$scope', '$rootScope', '$route', '$routeParams' ,'$window','$location', 'votingService',
+    function ($scope, $rootScope,  $route, $routeParams , $window, $location, votingService) {
 
         $scope.form = {
             id:undefined,
@@ -116,18 +116,31 @@ votingControllers.controller('pollDetailController', ['$scope', '$route', '$rout
             var options = $scope.poll.options.map(function(poll) {
                return poll.name
             });
+
             if (options.indexOf(form.customOption) >= 0) {
                 form.hasError = true;
                 form.error = "Can't have duplicate options.";
                 return;
             }
 
-
             form.id = $scope.poll._id;
-
             votingService.submitVote(form).then(function() {
                 $route.reload();
             });
+        };
+
+
+        $scope.deletePoll =  function() {
+            var shouldDeletePoll = $window.confirm("Are you sure you want to delete this poll?");
+            if (shouldDeletePoll === true) {
+                votingService.deletePoll($scope.poll._id).then(function() {
+                    $location.path('/polls/');
+                });
+            }
+        };
+
+        $scope.shouldShowDeleteButton =  function() {
+            return $scope.poll && $scope.poll.creator === $rootScope.userDetails.username;
         };
 
 
@@ -140,7 +153,6 @@ votingControllers.controller('pollDetailController', ['$scope', '$route', '$rout
                 }
 
                 $scope.poll = data;
-
 
                 renderChart($scope.poll);
             }, function () {

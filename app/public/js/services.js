@@ -48,6 +48,13 @@ votingServices.factory('votingService', ['$http', '$location',
             });
         };
 
+        var deletePoll = function(pollId) {
+            var url = appContext + '/api/poll/' + pollId;
+            return $http.delete(url).then(function (response) {
+                return response.data;
+            });
+        };
+
 
         var doLogin = function() {
             var url = appContext + '/api/twitter/requestLogin';
@@ -76,6 +83,7 @@ votingServices.factory('votingService', ['$http', '$location',
             createPoll: createPoll,
             getPollDetails: getPollDetails,
             submitVote: submitVote,
+            deletePoll: deletePoll,
             doLogin: doLogin,
             doLogout: doLogout,
             userDetails: userDetails

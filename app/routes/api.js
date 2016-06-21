@@ -19,6 +19,9 @@ module.exports = function (app) {
     app.route('/api/poll/:pollId/vote')
         .post(apiService.votePoll);
 
+    app.route('/api/poll/:pollId')
+        .delete(apiService.deletePoll);
+
     app.route('/api/poll-details/:pollId')
         .get(apiService.pollDetails);
 

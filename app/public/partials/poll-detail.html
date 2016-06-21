@@ -25,6 +25,7 @@
     </div>
     <div class="controls">
         <button type="submit" class="btn btn-primary vote-btn" ng-click="submitVote()">Submit Vote</button>
+        <button type="submit" class="btn btn-danger btn-delete-poll pull-right" ng-click="deletePoll()" ng-show="shouldShowDeleteButton()">Delete</button>
         <div class="pull-right twitter-share-div">
             <a href="https://twitter.com/share" class="twitter-share-button pull-right" data-size="large">Tweet</a>
             <script>!function (d, s, id) {

@@ -116,3 +116,8 @@ body {
 .main {
     padding-bottom: 2em;
 }
+
+.btn-delete-poll {
+    margin-right: 2em;
+    margin-left: 4em;
+}

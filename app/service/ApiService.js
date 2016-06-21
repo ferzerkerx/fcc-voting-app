@@ -76,9 +76,24 @@ function ApiService () {
         if (session.hasOwnProperty('userData')) {
             userDetails.isLogged = true;
             userDetails.name = session.userData.name;
+            userDetails.username = session.userData.userName;
         }
         return res.json(userDetails);
 
+    };
+
+    this.deletePoll = function(req, res) {
+        var pollId =  req.params.pollId;
+
+        Poll.findOneAndRemove({ _id: pollId, creator: req.session.userData.userName}, function(err, poll) {
+
+            if (err) {
+                console.log(err);
+                return res.status(500).json(err);
+            }
+
+            return res.json(poll);
+        });
     };
 
     this.votePoll = function (req, res) {
