@@ -45,6 +45,8 @@ votingControllers.controller('newPollController', ['$scope', '$route', '$window'
 
         $scope.createPoll = function() {
             var form = $scope.form;
+            form.hasError = false;
+            form.error = undefined;
 
             if (! form.title || form.title === "") {
                 form.hasError = true;
@@ -97,6 +99,8 @@ votingControllers.controller('pollDetailController', ['$scope', '$route', '$rout
 
         $scope.submitVote =  function() {
             var form = $scope.form;
+            form.hasError = false;
+            form.error = undefined;
             if (! form.selectedOption || form.selectedOption === "") {
                 form.hasError = true;
                 form.error = 'Please select an option';

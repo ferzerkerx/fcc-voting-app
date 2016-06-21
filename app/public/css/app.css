@@ -5,6 +5,10 @@
     display: block;
 }
 
+.navbar-brand {
+    color: #70A974 !important;
+}
+
 body {
     background-color: #548687;
     color: #70A974;
@@ -29,11 +33,20 @@ body {
     border-radius: 5px;
 }
 
+.polls {
+    width: 80%;
+    margin:auto;
+}
+
 .poll {
     background-color: #ffffff;
     cursor: pointer;
     margin: 0.5em auto;
+    height: 2em;
+}
 
+.poll p {
+    margin-left: 2em;
 }
 
 .poll:hover {
@@ -93,4 +106,13 @@ body {
 
 .controls {
     margin-top: 0.5em;
+}
+
+.new-form-poll {
+    width: 90%;
+    margin: auto;
+}
+
+.main {
+    padding-bottom: 2em;
 }

@@ -1,14 +1,12 @@
 <div>
-    New Poll
-
     <p ng-show="form.hasError" class="help-block">{{form.error}}</p>
-    <form>
+    <form class="new-form-poll">
         <div class="form-group">
             <label for="new-title">Title:</label>
             <input type="text" class="form-control" id="new-title" ng-model="form.title" required/>
         </div>
         <div class="form-group">
-            <label for="new-options">Options:</label>
+            <label for="new-options">Options(seperated by line):</label>
             <textarea class="form-control" id="new-options" ng-model="form.options" required></textarea>
         </div>
         <button type="submit" ng-click="createPoll()" class="btn btn-primary pull-right submit-button">Submit</button>

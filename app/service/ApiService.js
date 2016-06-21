@@ -95,7 +95,7 @@ function ApiService () {
             if (customOption) {
                 poll.options.push({
                     name: customOption,
-                    votes: 0
+                    votes: 1
                 })
             }
             else {
