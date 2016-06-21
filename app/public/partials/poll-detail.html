@@ -2,17 +2,19 @@
     <div class="col-md-6 fix">
 
         <h2>{{poll.title}}</h2>
+        <p ng-show="form.hasError" class="help-block">{{form.error}}</p>
         <form class="poll-vote-form">
             <input type="hidden" name="poll-id" value="{{poll._id}}"/>
             <div class="form-group">
                 <label for="options">I'd like to vote for...:</label>
-                <select id="options" ng-model="form.selectedOption">
+                <select id="options" ng-model="form.selectedOption" name="selectedOption" required>
                     <option value="" disabled selected>Choose an option...</option>
                     <option ng-repeat="option in poll.options">{{option.name}}</option>
+                    <option value="_custom" ng-show="userDetails.isLogged">I'd like a custom option</option>
                 </select>
             </div>
 
-            <div class="form-group">
+            <div class="form-group" ng-show="form.shouldShowCustomVote">
                 <label for="custom-option">Vote with my own option:</label>
                 <input id="custom-option" type="text" name="custom-option" ng-model="form.customOption"/>
             </div>

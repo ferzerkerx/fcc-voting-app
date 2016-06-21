@@ -67,30 +67,56 @@ votingControllers.controller('pollDetailController', ['$scope', '$route', '$rout
         $scope.form = {
             id:undefined,
             selectedOption:undefined,
-            customOption:undefined
+            customOption:undefined,
+            shouldShowCustomVote: false
         };
 
         $scope.submitVote =  function() {
+            if (! $scope.form.selectedOption || $scope.form.selectedOption === "") {
+                $scope.form.hasError = true;
+                $scope.form.error = 'Please select an option';
+                return;
+            }
+
+            if ($scope.form.selectedOption === "_custom" && (!$scope.form.customOption || $scope.form.customOption.length === 0)) {
+                $scope.form.hasError = true;
+                $scope.form.error = 'Please select a valid custom option';
+                return;
+
+            }
+            var options = $scope.poll.options.map(function(poll) {
+               return poll.name
+            });
+            if (options.indexOf($scope.form.customOption) >= 0) {
+                $scope.form.hasError = true;
+                $scope.form.error = "Can't have duplicate options.";
+                return;
+            }
+
+
             $scope.form.id = $scope.poll._id;
-            //TODO validate
+
             votingService.submitVote($scope.form).then(function() {
-                $route.reload();//TODO do not reload
+                $route.reload();
             });
         };
 
 
         function getPollDetails(pollId) {
             votingService.getPollDetails(pollId).then(function(data) {
-
                 if (!data) {
-                    //TODO
+                    alert("Poll data couldn't be found.");
                     $location.path('/polls/');
                     return;
                 }
 
-
                 $scope.poll = data;
+
+
                 renderChart($scope.poll);
+            }, function () {
+                alert("Poll data couldn't be found.");
+                $location.path('/polls/');
             });
         }
 
@@ -129,12 +155,15 @@ votingControllers.controller('pollDetailController', ['$scope', '$route', '$rout
         }
 
         getPollDetails($routeParams.pollId);
+        $('#options').change(function() {
+            $scope.form.shouldShowCustomVote = ('_custom' === $("#options").val());
+        });
     }]);
 
 votingControllers.controller('barController', ['$scope', '$rootScope', '$route', '$routeParams' ,'$window','$location', 'votingService',
     function ($scope, $rootScope, $route, $routeParams , $window, $location, votingService) {
 
-        $scope.userDetails = {};
+        $rootScope.userDetails = {};
         $scope.twitterLogin = function() {
             votingService.doLogin().then(function(data) {
                 window.open(data.location,  "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=500,width=400,height=400");
@@ -143,13 +172,13 @@ votingControllers.controller('barController', ['$scope', '$rootScope', '$route',
 
         $scope.twitterLogout = function() {
             votingService.doLogout().then(function() {
-                $scope.userDetails = {};
+                $rootScope.userDetails = {};
                 $location.path('/');
             });
         };
 
         votingService.userDetails().then(function(data) {
-            $scope.userDetails = data;
+            $rootScope.userDetails = data;
         });
 
 
