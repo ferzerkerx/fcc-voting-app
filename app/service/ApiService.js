@@ -29,6 +29,7 @@ function ApiService () {
         });
     };
 
+    //TODO validate this service is only invoked whenever a session is present
     this.createPoll = function (req, res) {
 
         var options = req.body.options;

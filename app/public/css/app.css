@@ -6,7 +6,7 @@
 }
 
 body {
-    background-color: #ffffff;
+    background-color: #548687;
     color: #70A974;
     font-size: 1.5em;
 }
@@ -18,6 +18,10 @@ body {
     border-radius: 5px;
     padding-bottom: 1em;
     margin-top: 3em;
+}
+
+.navbar-default {
+    background-color: #F5F5EB;
 }
 
 .container-fluid {
@@ -38,6 +42,10 @@ body {
 
 .by {
     margin-top: 2em;
+}
+
+.by a {
+    color: white;
 }
 
 .submit-button {

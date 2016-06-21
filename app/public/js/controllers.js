@@ -44,13 +44,37 @@ votingControllers.controller('newPollController', ['$scope', '$route', '$window'
         $scope.form = {};
 
         $scope.createPoll = function() {
-            //TODO validate
             var form = $scope.form;
+
+            if (! form.title || form.title === "") {
+                form.hasError = true;
+                form.error = 'Please specify a title.';
+                return;
+            }
+
+            if (! form.options || form.options === "") {
+                form.hasError = true;
+                form.error = 'Please specify some options.';
+                return;
+            }
+
+            var options = form.options.split('\n').sort();
+            var uniqueOptions = [];
+            $.each(options, function(i, el){
+                if($.inArray(el, uniqueOptions) === -1) uniqueOptions.push(el);
+            });
+
+
+            if (options.length !== uniqueOptions.length) {
+                form.hasError = true;
+                form.error = "Can't have duplicated options.";
+                return;
+            }
 
             var poll = {
                 creator: 'someID',
                 title:  form.title,
-                options:  form.options.split('\n')
+                options:  options
             };
 
             votingService.createPoll(poll).then(function(data) {
@@ -72,31 +96,32 @@ votingControllers.controller('pollDetailController', ['$scope', '$route', '$rout
         };
 
         $scope.submitVote =  function() {
-            if (! $scope.form.selectedOption || $scope.form.selectedOption === "") {
-                $scope.form.hasError = true;
-                $scope.form.error = 'Please select an option';
+            var form = $scope.form;
+            if (! form.selectedOption || form.selectedOption === "") {
+                form.hasError = true;
+                form.error = 'Please select an option';
                 return;
             }
 
-            if ($scope.form.selectedOption === "_custom" && (!$scope.form.customOption || $scope.form.customOption.length === 0)) {
-                $scope.form.hasError = true;
-                $scope.form.error = 'Please select a valid custom option';
+            if (form.selectedOption === "_custom" && (!form.customOption || form.customOption.length === 0)) {
+                form.hasError = true;
+                form.error = 'Please select a valid custom option';
                 return;
 
             }
             var options = $scope.poll.options.map(function(poll) {
                return poll.name
             });
-            if (options.indexOf($scope.form.customOption) >= 0) {
-                $scope.form.hasError = true;
-                $scope.form.error = "Can't have duplicate options.";
+            if (options.indexOf(form.customOption) >= 0) {
+                form.hasError = true;
+                form.error = "Can't have duplicate options.";
                 return;
             }
 
 
-            $scope.form.id = $scope.poll._id;
+            form.id = $scope.poll._id;
 
-            votingService.submitVote($scope.form).then(function() {
+            votingService.submitVote(form).then(function() {
                 $route.reload();
             });
         };
