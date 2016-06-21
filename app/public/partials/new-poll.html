@@ -3,13 +3,13 @@
 
     <form>
         <div class="form-group">
-            <label for="title">Title:</label>
-            <input type="text" class="form-control" id="title" ng-model="form.title">
+            <label for="new-title">Title:</label>
+            <input type="text" class="form-control" id="new-title" ng-model="form.title">
         </div>
         <div class="form-group">
-            <label for="options">Options:</label>
-            <textarea class="form-control" id="options" ng-model="form.options"></textarea>
+            <label for="new-options">Options:</label>
+            <textarea class="form-control" id="new-options" ng-model="form.options"></textarea>
         </div>
-        <button type="submit" ng-click="createPoll()" class="btn btn-primary">Submit</button>
+        <button type="submit" ng-click="createPoll()" class="btn btn-primary pull-right submit-button">Submit</button>
     </form>
 </div>

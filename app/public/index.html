@@ -18,17 +18,31 @@
                 <li><a href="/#/polls" data-toggle="tab">Home</a></li>
                 <li ng-show="userDetails.isLogged"><a href="/#/my-polls" data-toggle="tab">My Polls</a></li>
                 <li ng-show="userDetails.isLogged"><a href="/#/new-poll" data-toggle="tab">New Poll</a></li>
-                <li ng-show="!userDetails.isLogged"><button ng-click="twitterLogin()">Sign in with twitter</button></li>
-                <li ng-show="userDetails.isLogged">{{userDetails.name}}<button ng-click="twitterLogout()">Sign out</button></li>
+                <li ng-show="!userDetails.isLogged"><button ng-click="twitterLogin()" class="btn btn-primary sign-in">Sign in with twitter</button></li>
+
+                <li ng-show="userDetails.isLogged">
+                <div class="dropdown sign-in">
+
+                    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                        {{userDetails.name}}
+                        <span class="caret"></span>
+                    </button>
+
+                    <ul class="dropdown-menu">
+                        <li class="text-center"><button ng-click="twitterLogout()" class="btn btn-danger sign-out">Sign out</button></li>
+                    </ul>
+                    </div>
+                </li>
             </ul>
+
         </div>
     </nav>
 </div>
 
-<div class="container">
+<div class="container main-content">
     <div class="row">
         <div class="col-md-12">
-            <div class="main">
+            <div class="main text-center">
                 <h1>FCC Voting App</h1>
             </div>
         </div>
@@ -39,6 +53,9 @@
 
         </div>
     </div>
+</div>
+<div class="text-center by">
+    <a href="https://github.com/ferzerkerx" target="_blank">by ferzerkerx</a>
 </div>
 
 <script src="public/bower_components/jquery/dist/jquery.js"></script>

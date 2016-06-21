@@ -1,8 +1,8 @@
-<div>
-    <div>
+<div  class="polls">
+    <p class="text-center">
         Select a poll to see the results and vote, or make a new poll!
-    </div>
-    <div ng-repeat="poll in polls">
+    </p>
+    <div ng-repeat="poll in polls" class="poll">
         {{poll.title}}
         <a href="" ng-click="goToDetails(poll._id)">Go to details</a>
     </div>

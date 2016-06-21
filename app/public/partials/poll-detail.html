@@ -1,24 +1,41 @@
 <div>
-    <div>
-        <h2>{{poll.title}}</h2>
-        <form>
-            <input type="hidden" name="poll-id" value="{{poll._id}}"/>
-            <div class="form-group">
-                <label for="options">I'd like to vote for...:</label>
-                <select id="options" ng-model="form.selectedOption">
-                    <option value="" disabled selected>Choose an option...</option>
-                    <option ng-repeat="option in poll.options">{{option.name}}</option>
-                </select>
-            </div>
+    <div class="col-md-6">
+        <div class="poll-detail">
+            <h2>{{poll.title}}</h2>
+            <form class="poll-vote-form">
+                <input type="hidden" name="poll-id" value="{{poll._id}}"/>
+                <div class="form-group">
+                    <label for="options">I'd like to vote for...:</label>
+                    <select id="options" ng-model="form.selectedOption">
+                        <option value="" disabled selected>Choose an option...</option>
+                        <option ng-repeat="option in poll.options">{{option.name}}</option>
+                    </select>
+                </div>
 
-            <div class="form-group">
-                <label for="custom-option">Vote with my own option:</label>
-                <input id="custom-option" type="text" name="custom-option" ng-model="form.customOption"/>
-            </div>
-
-            <button type="submit" class="btn btn-primary" ng-click="submitVote()">Submit Vote</button>
-        </form>
+                <div class="form-group">
+                    <label for="custom-option">Vote with my own option:</label>
+                    <input id="custom-option" type="text" name="custom-option" ng-model="form.customOption"/>
+                </div>
+            </form>
+        </div>
     </div>
-    <canvas id="myChart" width="100" height="100"></canvas>
-    <a href="https://twitter.com/share" class="twitter-share-button" data-size="large">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+    <div class="col-md-6">
+        <canvas id="myChart"></canvas>
+    </div>
+    <div class="controls">
+        <button type="submit" class="btn btn-primary vote-btn" ng-click="submitVote()">Submit Vote</button>
+        <div class="pull-right twitter-share-div">
+            <a href="https://twitter.com/share" class="twitter-share-button pull-right" data-size="large">Tweet</a>
+            <script>!function (d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
+                if (!d.getElementById(id)) {
+                    js = d.createElement(s);
+                    js.id = id;
+                    js.src = p + '://platform.twitter.com/widgets.js';
+                    fjs.parentNode.insertBefore(js, fjs);
+                }
+            }(document, 'script', 'twitter-wjs');</script>
+        </div>
+    </div>
+
 </div>
