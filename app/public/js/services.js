@@ -8,7 +8,10 @@ var votingServices = angular.module('votingServices', ['ngResource']);
 votingServices.factory('votingService', ['$http', '$location',
     function($http, $location) {
 
-        var appContext = $location.url().substring(0, $location.url().indexOf("/",2));
+        var appContext = $location.absUrl();
+        if (appContext.indexOf("#")) {
+            appContext =  appContext.substring(0, appContext.indexOf("#") - 1);
+        }
 
         var listPolls = function() {
             var url = appContext + '/api/polls';
