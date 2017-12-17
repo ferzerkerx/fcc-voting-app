@@ -147,17 +147,16 @@ votingControllers.controller('pollDetailController', ['$scope', '$rootScope', '$
         function getPollDetails(pollId) {
             votingService.getPollDetails(pollId).then(function(data) {
                 if (!data) {
-                    throw "Poll data couldn't be found.";
                     $location.path('/polls/');
-                    return;
+                    throw "Poll data couldn't be found.";
                 }
 
                 $scope.poll = data;
 
                 renderChart($scope.poll);
             }, function () {
-                throw "Poll data couldn't be found.";
                 $location.path('/polls/');
+                throw "Poll data couldn't be found.";
             });
         }
 
