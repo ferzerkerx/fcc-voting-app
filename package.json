@@ -28,7 +28,7 @@
     "dotenv": "^1.2.0",
     "express": "^4.12.4",
     "express-session": "^1.13.0",
-    "mongoose": "^5.0.17",
+    "mongoose": "^5.2.12",
     "oauth": "^0.9.14",
     "qs": "^6.2.0",
     "angular": "1.6.9",
@@ -37,9 +37,6 @@
     "angular-route": "1.6.9",
     "angular-resource": "1.6.9",
     "chart.js": "^2.7.1"
-  },
-   "resolutions": {
-    "**/mpath": "^0.5.1"
   },
   "devDependencies": {
     "copy-webpack-plugin": "^4.0.1",
