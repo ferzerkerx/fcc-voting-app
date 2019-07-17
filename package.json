@@ -27,7 +27,7 @@
     "connect-mongo": "^3.0.0",
     "dotenv": "^1.2.0",
     "express": "^4.12.4",
-    "express-session": "^1.13.0",
+    "express-session": "^1.16.2",
     "mongoose": "^5.2.12",
     "oauth": "^0.9.14",
     "qs": "^6.2.0",
