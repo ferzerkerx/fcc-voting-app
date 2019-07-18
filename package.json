@@ -28,7 +28,7 @@
     "dotenv": "^8.0.0",
     "express": "^4.12.4",
     "express-session": "^1.16.2",
-    "mongoose": "^5.2.12",
+    "mongoose": "^5.6.5",
     "oauth": "^0.9.14",
     "qs": "^6.2.0",
     "angular": "1.6.9",
