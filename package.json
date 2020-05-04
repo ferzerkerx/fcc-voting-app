@@ -36,7 +36,7 @@
     "jquery": "3.4.1",
     "mongoose": "^5.8.4",
     "oauth": "^0.9.14",
-    "qs": "^6.9.1"
+    "qs": "^6.9.4"
   },
   "devDependencies": {
     "copy-webpack-plugin": "5.1.1",
